@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator </title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .menu {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+        }
+
+        #theme {
+            border: none !important;
+            background: transparent;
+            outline: none !important;
+
+        }
+    </style>
+</head>
+
+<body data-bs-theme="">
+
+
+    <header class="d-flex justify-content-between bg-dark py-2">
+        <div class="logo">
+            <h3 class="text-light ms-5">Menu</h3>
+        </div>
+        <ul class="nav nav-pills text-light">
+            <li class="nav-item">
+                <a href="./calculate.html" class="nav-link active" aria-current="page">Calculator</a>
+            </li>
+            <li>
+                <a href="./timer.html" class="nav-link text-light">DG Clock</a>
+            </li>
+            <li>
+                <a href="./Counter.html" class="nav-link text-light">Counter</a>
+            </li>
+            <li>
+                <a href="#" class="nav-link text-light">Products</a>
+            </li>
+            <li>
+                <a href="#" class="nav-link text-light">Customers</a>
+            </li>
+        </ul>
+        <select id="theme" onchange="change()" class="bg-warning rounded me-5">
+            <option value="auto" class="text-primary">Auto</option>
+            <option value="light" class="text-primary text-bold">Light</option>
+            <option value="dark" class="text-primary text-bold">Dark</option>
+        </select>
+    </header>
+
+    <div class="container">
+        <div class="d-flex justify-content-center p-4">
+            <div class="col-sm-5 col-md-5 shadow-lg bg-dark-subtle rounded mx-3">
+                <h1 class="text-center text-decoration-underline mt-4 mb-4">Calculator</h1>
+                <form class="p-4" autocomplete="off">
+                    <div class="form-floating mb-3">
+                        <input type="number" id="fnum" class="form-control" required placeholder>
+                        <label for="fnum">First Number</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="number" id="snum" class="form-control" required placeholder>
+                        <label for="snum">Second Number</label>
+                    </div>
+
+                    <div class=" mb-3">
+
+                        <select id="select" class="form-control">
+                            <option value="">Choose Operator</option>
+                            <hr style="opacity: 50%;">
+                            <option value="+">Add</option>
+                            <option value="-">Subtract</option>
+                            <option value="*">Multiply</option>
+                            <option value="/">Division</option>
+                            <option value="%">Remainder</option>
+                            <option value="**">Power</option>
+                        </select>
+                    </div>
+                    <div class="btn m-auto w-100">
+                        <button class="btn btn-warning" onclick="calculate()">Calculate</button>
+                        <button class="btn btn-warning">Reset</button>
+                    </div>
+
+                    <hr>
+                    <input type="text" id="result" class="form-control" placeholder="Result" readonly>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const calculate = () => {
+            event.preventDefault()
+            let x = Number(document.getElementById('fnum').value)
+            let y = Number(document.getElementById('snum').value)
+            let op = document.getElementById('select').value
+
+            switch (op) {
+                case '+':
+                    const add = x + y
+                    document.getElementById("result").value = `The sum is ${add}`
+                    break;
+
+                case '-':
+                    const sub = x - y
+                    document.getElementById("result").value = `The Subtract is ${sub}`
+                    break;
+
+                case '*':
+                    const mul = x * y
+                    document.getElementById("result").value = `The multiplication is ${mul}`
+                    break;
+
+                case '/':
+                    const div = x / y
+                    document.getElementById("result").value = `The division is ${div}`
+                    break;
+
+                case '%':
+                    const mod = x % y
+                    document.getElementById("result").value = `The remainder is ${mod}`
+                    break;
+
+                case '**':
+                    const power = x ** y
+                    document.getElementById("result").value = `The power value is ${power}`
+                    break;
+
+                default:
+                    document.getElementById("result").value = `Invalid Input or Operator`
+
+            }
+        }
+    </script>
+
+    <script>
+        const change = () => {
+            const theme = document.querySelector('#theme').value
+            if (theme == 'light' || theme == 'auto') {
+                document.querySelector('body').setAttribute('data-bs-theme', 'light')
+            }
+            else if (theme == 'dark') {
+                document.querySelector('body').setAttribute('data-bs-theme', 'dark')
+            }
+            else {
+
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
