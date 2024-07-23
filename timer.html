@@ -1,32 +1,75 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<html>
 <body>
-    <span id="min">00</span>
-    <span id="sec">00</span>
+    <h1>
+        <span id="hrs">00</span>:
+        <span id="min">00</span>: 
+        <span id="sec">00</span>
+    </h1>
     <button onclick="start()">Start</button>
-    <script>
-        const start=()=>{
-            count =0
-            
-            setInterval(()=>{
-                document.getElementById("sec").innerHTML=count
-                count++
-                
-                setInterval(()=>{
-                    document.getElementById("min").innerHTML=count
-                    count++
-                    
-    
-                },60000)
+    <button onclick="stop()">Stop</button>
+    <button onclick="reset()">reset</button>
 
-            },100)
+
+    <script>
+        let ilen = 60;
+        let klen = 100;
+        let i = 0;
+        let j = 1;
+        let k = 1;
+
+        let setsec;
+        let setmin;
+        let sethrs;
+
+        function myfuc1() {
+            i = i % ilen;
+            if (i < 10) {
+                document.querySelector('#sec').innerHTML = `0${i}`;
+            } else {
+                document.querySelector('#sec').innerHTML = `${i}`;
+            }
+            i++;
         }
 
+        function myfuc2() {
+            j = j % ilen;
+            if (j < 10) {
+                document.querySelector('#min').innerHTML = `0${j}`;
+            } else {
+                document.querySelector('#min').innerHTML = `${j}`;
+            }
+            j++;
+        }
+
+        function myfuc3() {
+            k = k % klen;
+            if (k < 10) {
+                document.querySelector('#hrs').innerHTML = `0${k}`;
+            } else {
+                document.querySelector('#hrs').innerHTML = `${k}`;
+            }
+            k++;
+        }
+
+        function start() {
+            setsec = setInterval(myfuc1, 1000);
+            setmin = setInterval(myfuc2, 60000);
+            sethrs = setInterval(myfuc3, 3600000);
+        }
+
+        function stop() {
+            clearInterval(setsec);
+            clearInterval(setmin);
+            clearInterval(sethrs);
+        }
+
+        function reset(){
+            document.getElementById("hrs").innerHTML='00'
+            document.getElementById("min").innerHTML='00'
+            document.getElementById("sec").innerHTML='00'
+
+        }
     </script>
 </body>
 </html>
